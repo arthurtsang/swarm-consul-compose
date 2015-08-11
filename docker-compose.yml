@@ -1,5 +1,5 @@
 consul:
-  image: consul
+  image: arthurtsang/docker-consul
   hostname: node1
   ports:
     - "8300:8300"
