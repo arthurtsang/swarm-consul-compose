@@ -14,4 +14,4 @@ docker -H tcp://node1:8888 run -d --name www -p 80:80 nginx
 
 # to list running containers 
 
-docker -H tcp://arthur-mesos-m1:8888 ps
+docker -H tcp://node1:8888 ps
