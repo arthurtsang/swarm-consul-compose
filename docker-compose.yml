@@ -9,7 +9,8 @@ consul:
     - "8302:8302/udp"
     - "8400:8400"
     - "8500:8500"
-    - "53:53/udp"
+    - "8600:8600"
+    - "8600:8600/udp"
   command: agent -config-dir /opt/config -advertise node1.ip -bootstrap-expect 2 -retry-join node1 -retry-join node2
 
 join:
@@ -21,3 +22,14 @@ manage:
   ports: 
     - "8888:2375"
   command: manage consul://node1:8500/swarm
+
+registrator:
+  image: gliderlabs/registrator
+  net: host
+  hostname: node1
+  volumes:
+    - /var/run/docker.sock:/tmp/docker.sock
+  command: consul://node1:8500
+  security_opt:
+    - label:type:docker_t
+
