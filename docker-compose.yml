@@ -11,6 +11,8 @@ consul:
     - "8500:8500"
     - "53:8600"
     - "53:8600/udp"
+  environment:
+    - SERVICE_IGNORE=true
   command: agent -config-dir /opt/config -advertise node1.ip -bootstrap-expect 2 -retry-join node1 -retry-join node2
 
 join:
