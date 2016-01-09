@@ -17,21 +17,20 @@ consul:
 
 join:
   image: swarm
-  command: join --addr=node1:2375 consul://node1:8500/swarm
+  command: join --addr=node1:2375 consul://172.17.0.1:8500/swarm
 
 manage:
   image: swarm
   ports: 
     - "8888:2375"
-  command: manage consul://node1:8500/swarm
+  command: manage consul://172.17.0.1:8500/swarm
 
 registrator:
   image: gliderlabs/registrator
   net: host
-  hostname: node1
   volumes:
     - /var/run/docker.sock:/tmp/docker.sock
-  command: consul://node1:8500
+  command: consul://localhost:8500
   security_opt:
     - label:type:docker_t
 
